@@ -1,37 +1,49 @@
 import { Component } from '@angular/core';
-import { UserService } from '../user.service';
 import { Router } from '@angular/router';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-register',
   standalone: false,
   templateUrl: './register.component.html',
-  styleUrl: './register.component.css'
+  styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
 
-  user = {
+  // Register model to hold the form data
+  registerModel = {
     username: '',
     email: '',
     password: '',
     confirmPassword: ''
   };
 
+  // Injecting UserService and Router into the constructor
   constructor(private userService: UserService, private router: Router) { }
 
-  register() {
-    if (this.user.password !== this.user.confirmPassword) {
-      alert("Passwords don't match");
+  // Called when the form is submitted
+  onSubmit() {
+    // Checking if the passwords match
+    if (this.registerModel.password !== this.registerModel.confirmPassword) {
+      alert("Passwords do not match.");
       return;
     }
 
-    this.userService.register(this.user).subscribe(
-      response => {
-        alert('Registration successful');
+    // Call the register method from UserService to hit the backend API
+    this.userService.register(this.registerModel).subscribe(
+      (response) => {
+        // Log success response
+        console.log('Registration successful!', response);
+
+        // After successful registration, navigate to the login page
         this.router.navigate(['/login']);
       },
-      error => {
-        alert('Error: ' + error.error);
+      (error) => {
+        // Log error response
+        console.error('Registration failed:', error);
+
+        // Alert user if registration fails
+        alert('Registration failed. Please try again.');
       }
     );
   }

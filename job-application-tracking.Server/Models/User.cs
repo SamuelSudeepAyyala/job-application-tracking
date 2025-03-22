@@ -1,9 +1,9 @@
-﻿namespace job_application_tracking.Server.Models
+﻿using Microsoft.AspNetCore.Identity;
+
+namespace job_application_tracking.Server.Models
 {
-    public class User
+    public class User : IdentityUser
     {
-        public string Username { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
+        // Add custom properties here if needed
     }
 }

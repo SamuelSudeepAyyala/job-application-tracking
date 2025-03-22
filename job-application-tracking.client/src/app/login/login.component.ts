@@ -1,29 +1,38 @@
 import { Component } from '@angular/core';
-import { UserService } from '../user.service';
 import { Router } from '@angular/router';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-login',
   standalone: false,
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-  user = {
-    username: '',
-    password: ''
+  loginModel = {
+    email: '',
+    password: '',
   };
 
   constructor(private userService: UserService, private router: Router) { }
 
-  login() {
-    this.userService.login(this.user).subscribe(
-      response => {
-        alert('Login successful');
+  // Called when the form is submitted
+  onSubmit() {
+    if (!this.loginModel.email || !this.loginModel.password) {
+      alert('Please fill in both email and password');
+      return;
+    }
+
+    // Call the login method from UserService to hit the backend API
+    this.userService.login(this.loginModel).subscribe(
+      (response) => {
+        console.log('Login successful!', response);
+        // Navigate to the dashboard or home page on successful login
         this.router.navigate(['/dashboard']);
       },
-      error => {
-        alert('Error: ' + error.error);
+      (error) => {
+        console.error('Login failed:', error);
+        alert('Invalid credentials. Please try again.');
       }
     );
   }
