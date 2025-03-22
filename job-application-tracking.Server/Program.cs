@@ -1,30 +1,32 @@
+using Microsoft.OpenApi.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+
+// Add Swagger/OpenAPI support
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Job Application Tracking API", Version = "v1" });
+});
 
 var app = builder.Build();
 
-app.UseDefaultFiles();
-app.UseStaticFiles();
+// Enable middleware to serve generated Swagger as a JSON endpoint.
+app.UseSwagger();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+// Enable middleware to serve Swagger UI (HTML, JS, CSS, etc.)
+app.UseSwaggerUI(c =>
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Job Application Tracking API v1");
+});
 
-app.UseHttpsRedirection();
+// Enable CORS if necessary
+app.UseCors("AllowAll");
 
 app.UseAuthorization();
 
 app.MapControllers();
-
-app.MapFallbackToFile("/index.html");
 
 app.Run();
