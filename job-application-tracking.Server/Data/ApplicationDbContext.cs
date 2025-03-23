@@ -11,6 +11,7 @@ namespace job_application_tracking.Server.Data
         {
         }
 
-        // Add any custom DbSets for your application here if needed.
+        public DbSet<JobApplication> JobApplications { get; set; }
+
     }
 }

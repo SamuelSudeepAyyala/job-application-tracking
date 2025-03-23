@@ -1,20 +1,22 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { NgxPaginationModule } from 'ngx-pagination';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { RegisterComponent } from './register/register.component';
-import { LoginComponent } from './login/login.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { FormsModule } from '@angular/forms'; 
+import { RegisterComponent } from '../app/components/register/register.component';
+import { LoginComponent } from '../app/components/login/login.component';
+import { DashboardComponent } from '../app/components/dashboard/dashboard.component';
+import { FormsModule } from '@angular/forms';
+import { JobApplicationAddComponent } from './components/job-application-add/job-application-add.component'; 
 
 @NgModule({
   declarations: [
     AppComponent,
     RegisterComponent,
     LoginComponent,
-    DashboardComponent
+    DashboardComponent, 
+    JobApplicationAddComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,

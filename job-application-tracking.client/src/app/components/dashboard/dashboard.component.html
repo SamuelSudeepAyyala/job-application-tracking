@@ -1,0 +1,30 @@
+<div class="dashboard">
+  <h1>Welcome to the Job Application Dashboard</h1>
+
+  <h2>Your Job Applications</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Job Title</th>
+        <th>Company</th>
+        <th>Application Date</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let jobApplication of jobApplications">
+        <td>{{ jobApplication.jobTitle }}</td>
+        <td>{{ jobApplication.company }}</td>
+        <td>{{ jobApplication.applicationDate | date }}</td>
+        <td>{{ jobApplication.status }}</td>
+        <td>
+          <button (click)="viewJobApplication(jobApplication.id)">View</button>
+          <button (click)="deleteJobApplication(jobApplication.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <button routerLink="/job-application-add">Add New Job Application</button>
+</div>

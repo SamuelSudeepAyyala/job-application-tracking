@@ -22,4 +22,18 @@ export class UserService {
   register(registerData: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/register`, registerData);
   }
+
+  getToken(): string {
+    return localStorage.getItem('token') || '';
+  }
+
+  // Set token in localStorage
+  setToken(token: string): void {
+    localStorage.setItem('token', token);
+  }
+
+  // Clear token (on logout)
+  logout(): void {
+    localStorage.removeItem('token');
+  }
 }

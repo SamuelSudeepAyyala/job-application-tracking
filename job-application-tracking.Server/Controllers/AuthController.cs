@@ -76,7 +76,7 @@ namespace job_application_tracking.Server.Controllers
                 return Unauthorized("Invalid username or password.");
             }
 
-            return Ok(new { message = "Login successful" });
+            return Ok(user);
         }
     }
 }

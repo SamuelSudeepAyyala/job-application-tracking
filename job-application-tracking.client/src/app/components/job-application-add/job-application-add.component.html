@@ -1,0 +1,26 @@
+<div class="job-application-add">
+  <h2>Add New Job Application</h2>
+  <form (ngSubmit)="onSubmit()">
+    <label for="jobTitle">Job Title:</label>
+    <input type="text" id="jobTitle" [(ngModel)]="jobTitle" name="jobTitle" required />
+
+    <label for="company">Company:</label>
+    <input type="text" id="company" [(ngModel)]="company" name="company" required />
+
+    <label for="applicationDate">Application Date:</label>
+    <input type="date" id="applicationDate" [(ngModel)]="applicationDate" name="applicationDate" required />
+
+    <label for="status">Status:</label>
+    <select id="status" [(ngModel)]="status" name="status" required>
+      <option value="Applied">Applied</option>
+      <option value="Interviewing">Interviewing</option>
+      <option value="Offer">Offer</option>
+      <option value="Rejected">Rejected</option>
+    </select>
+
+    <label for="notes">Notes:</label>
+    <textarea id="notes" [(ngModel)]="notes" name="notes"></textarea>
+
+    <button type="submit">Add Job Application</button>
+  </form>
+</div>
