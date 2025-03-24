@@ -2,29 +2,40 @@
   <h1>Welcome to the Job Application Dashboard</h1>
 
   <h2>Your Job Applications</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>Job Title</th>
-        <th>Company</th>
-        <th>Application Date</th>
-        <th>Status</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let jobApplication of jobApplications">
-        <td>{{ jobApplication.jobTitle }}</td>
-        <td>{{ jobApplication.company }}</td>
-        <td>{{ jobApplication.applicationDate | date }}</td>
-        <td>{{ jobApplication.status }}</td>
-        <td>
-          <button (click)="viewJobApplication(jobApplication.id)">View</button>
-          <button (click)="deleteJobApplication(jobApplication.id)">Delete</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
 
-  <button routerLink="/job-application-add">Add New Job Application</button>
+  <div class="job-cards-container">
+    <div *ngIf="message" class="message">
+      <p>{{ message }}</p>
+    </div>
+    <div class="job-card" *ngFor="let jobApplication of jobApplications">
+      <div class="job-card-header">
+        <h3>{{ jobApplication.jobTitle }}</h3>
+        <span>{{ jobApplication.status }}</span>
+      </div>
+      <div class="job-card-body">
+        <p><strong>Company:</strong> {{ jobApplication.company }}</p>
+        <p><strong>Application Date:</strong> {{ jobApplication.applicationDate | date }}</p>
+      </div>
+      <div class="job-card-footer">
+        <button (click)="viewJobApplication(jobApplication.id)">View</button>
+        <button (click)="deleteJobApplication(jobApplication.id)">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add New Job Application Button -->
+  <button routerLink="/job-application-add" class="add-job-btn">Add New Job Application</button>
+
+  <!-- Modal Popup for Viewing Job Details -->
+  <div class="modal" *ngIf="selectedJobApplication">
+    <div class="modal-content">
+      <span class="close-btn" (click)="closeModal()">×</span>
+      <h3>Job Application Details</h3>
+      <p><strong>Job Title:</strong> {{ selectedJobApplication.jobTitle }}</p>
+      <p><strong>Company:</strong> {{ selectedJobApplication.company }}</p>
+      <p><strong>Application Date:</strong> {{ selectedJobApplication.applicationDate | date }}</p>
+      <p><strong>Status:</strong> {{ selectedJobApplication.status }}</p>
+      <p><strong>Notes:</strong> {{ selectedJobApplication.notes }}</p>
+    </div>
+  </div>
 </div>

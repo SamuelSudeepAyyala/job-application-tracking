@@ -8,7 +8,8 @@ import { RegisterComponent } from '../app/components/register/register.component
 import { LoginComponent } from '../app/components/login/login.component';
 import { DashboardComponent } from '../app/components/dashboard/dashboard.component';
 import { FormsModule } from '@angular/forms';
-import { JobApplicationAddComponent } from './components/job-application-add/job-application-add.component'; 
+import { JobApplicationAddComponent } from './components/job-application-add/job-application-add.component';
+import { NavbarComponent } from './components/navbar/navbar.component'; 
 
 @NgModule({
   declarations: [
@@ -16,7 +17,7 @@ import { JobApplicationAddComponent } from './components/job-application-add/job
     RegisterComponent,
     LoginComponent,
     DashboardComponent, 
-    JobApplicationAddComponent
+    JobApplicationAddComponent, NavbarComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,

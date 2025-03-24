@@ -1,0 +1,24 @@
+<nav class="navbar">
+  <div class="navbar-left">
+    <a routerLink="/" class="navbar-brand">Job Application Tracker</a>
+  </div>
+
+  <div class="navbar-right">
+    <!-- Show Login/Register if not logged in -->
+    <div *ngIf="!isLoggedIn">
+      <button class="navbar-login-button" routerLink="/login">Login</button>
+      <button class="navbar-register-button" routerLink="/register">Register</button>
+    </div>
+
+    <!-- Show Profile and Logout if logged in -->
+    <div *ngIf="isLoggedIn" class="profile-container">
+      <div class="profile" (click)="toggleDropdown()">
+        <span class="profile-icon">👤</span>
+        <div class="profile-dropdown" *ngIf="dropdownOpen">
+          <p>Your Profile</p>
+          <button (click)="logout()">Logout</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

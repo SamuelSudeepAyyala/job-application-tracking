@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { JobApplicationService } from '../../services/job-application/job-application.service';
 import { JobApplication } from '../../models/job-application.model';
+import { HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,6 +12,9 @@ import { JobApplication } from '../../models/job-application.model';
 export class DashboardComponent implements OnInit {
   jobApplications: JobApplication[] = [];
   p: number = 1; // Pagination variable for ngx-pagination
+  selectedJobApplication: JobApplication | null = null; // Holds the job application for the modal
+
+  message: string = '';
 
   constructor(private jobApplicationService: JobApplicationService) { }
 
@@ -20,9 +24,19 @@ export class DashboardComponent implements OnInit {
 
   // Fetch job applications from the backend
   loadJobApplications(): void {
-    this.jobApplicationService.getAllJobApplications().subscribe(
+    const token = localStorage.getItem("authToken");
+    const userId = localStorage.getItem("userId");
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    this.jobApplicationService.getAllJobApplications(userId,headers).subscribe(
       (data: JobApplication[]) => {
-        this.jobApplications = data;
+        if (data.length == 0) {
+          console.log('No job applications');
+          this.message = 'No job applications';
+        }
+        else {
+          this.jobApplications = data;
+        }
+        
       },
       (error) => {
         console.error('Error fetching job applications:', error);
@@ -30,10 +44,16 @@ export class DashboardComponent implements OnInit {
     );
   }
 
-  // View a specific job application
+  // View a specific job application - opens the modal
   viewJobApplication(jobApplicationId: number): void {
-    console.log('Viewing job application with ID:', jobApplicationId);
-    // You can add routing logic to a job application detail page
+    this.selectedJobApplication = this.jobApplications.find(
+      (job) => job.id === jobApplicationId
+    ) || null;
+  }
+
+  // Close the modal
+  closeModal(): void {
+    this.selectedJobApplication = null;
   }
 
   // Delete a specific job application

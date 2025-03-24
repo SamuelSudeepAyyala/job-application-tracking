@@ -9,7 +9,8 @@ export class AuthService {
   private userSubject = new BehaviorSubject<any>(null);
   user$ = this.userSubject.asObservable();
 
-
+  private loggedInSubject = new BehaviorSubject<boolean>(this.isLoggedIn());
+  loggedIn$ = this.loggedInSubject.asObservable();
 
   constructor(private userService: UserService) {
     const userData = localStorage.getItem('user');
@@ -18,15 +19,19 @@ export class AuthService {
     }
   }
 
+  login(): void {
+    localStorage.setItem('isLoggedIn', 'true');
+    this.loggedInSubject.next(true);
+  }
+  
+  isLoggedIn(): boolean {
+    return localStorage.getItem('isLoggedIn') === 'true';
+  }
+
   // Check if the user is authenticated
   isAuthenticated(): boolean {
     const token = this.userService.getToken();
     return token !== null && token !== '';
-  }
-
-  setUser(user: any): void {
-    this.userSubject.next(user);
-    localStorage.setItem('userId', user.id);
   }
 
   // Get the JWT token (from UserService)
@@ -46,5 +51,8 @@ export class AuthService {
     this.userSubject.next(null);
     localStorage.removeItem('user');
     this.userService.logout();
+    localStorage.removeItem('islogin');
+    localStorage.removeItem('authToken');
+    this.loggedInSubject.next(false);
   }
 }

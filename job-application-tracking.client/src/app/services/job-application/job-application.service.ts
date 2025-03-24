@@ -11,8 +11,8 @@ export class JobApplicationService {
 
   constructor(private http: HttpClient) { }
 
-  getAllJobApplications(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl);
+  getAllJobApplications(userId: any, headers: HttpHeaders): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}?userId=${userId}`, { headers: headers });
   }
 
   addJobApplication(jobApplication: any): Observable<any> {

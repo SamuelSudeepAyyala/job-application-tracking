@@ -33,6 +33,7 @@ export class JobApplicationAddComponent {
       (response) => {
         console.log('Job application added:', response);
         this.router.navigate(['/dashboard']);
+        alert('Job application added successfully!');
       },
       (error) => {
         console.error('Error adding job application:', error);

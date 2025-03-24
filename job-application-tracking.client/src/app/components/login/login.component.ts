@@ -27,8 +27,12 @@ export class LoginComponent {
     // Call the login method from UserService to hit the backend API
     this.userService.login(this.loginModel).subscribe(
       (response) => {
-        this.authService.setUser(response);
+        localStorage.setItem('authToken', response.token);
+        localStorage.setItem('userId', response.userId);
+        localStorage.setItem('username', response.username);
+        localStorage.setItem('islogin', JSON.stringify(true));
         console.log('Login successful!', response);
+        this.authService.login();
         // Navigate to the dashboard or home page on successful login
         this.router.navigate(['/dashboard']);
       },

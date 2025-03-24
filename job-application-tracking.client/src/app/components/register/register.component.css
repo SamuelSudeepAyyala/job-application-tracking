@@ -1,49 +1,72 @@
+/* Register Page Specific Styles */
 .container {
   max-width: 500px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #f9f9f9;
+  margin-top: 100px;
+  background-color: #ffffff;
+  padding: 30px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 h2 {
+  font-size: 2rem;
+  color: #0056b3; /* Light blue color */
   text-align: center;
   margin-bottom: 20px;
 }
 
+form {
+  margin-top: 20px;
+}
+
+/* Form Group Styles */
 .form-group {
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
+/* Label Styles */
 label {
-  font-weight: bold;
+  font-weight: 600;
+  color: #555;
+  display: block;
+  margin-bottom: 5px;
 }
 
-input.form-control {
-  width: 100%;
-  padding: 10px;
-  font-size: 16px;
+/* Input Field Styles */
+input[type="text"], input[type="email"], input[type="password"] {
+  border-radius: 4px;
   border: 1px solid #ddd;
-  border-radius: 4px;
+  padding: 12px;
+  width: 100%;
+  margin-bottom: 20px;
   box-sizing: border-box;
+  font-size: 1rem;
 }
 
-button.btn {
+/* Button Styles */
+button.btn-primary {
+  background-color: #0056b3;
+  border-color: #0056b3;
+  padding: 12px 30px;
+  font-size: 1rem;
   width: 100%;
-  padding: 10px;
-  font-size: 16px;
-  border: none;
   border-radius: 4px;
-  background-color: #007bff;
-  color: white;
   cursor: pointer;
 }
 
-  button.btn:hover {
-    background-color: #0056b3;
+  /* Button Hover Styles */
+  button.btn-primary:hover {
+    background-color: #004085;
+    border-color: #003366;
   }
 
-button:disabled {
-  background-color: #cccccc;
+/* Bottom Text Styles */
+p {
+  font-size: 0.9rem;
+  color: #777;
+  text-align: center;
 }
+
+  p a {
+    color: #0056b3;
+  }

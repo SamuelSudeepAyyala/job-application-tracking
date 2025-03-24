@@ -1,26 +1,71 @@
 <div class="job-application-add">
-  <h2>Add New Job Application</h2>
-  <form (ngSubmit)="onSubmit()">
-    <label for="jobTitle">Job Title:</label>
-    <input type="text" id="jobTitle" [(ngModel)]="jobTitle" name="jobTitle" required />
+  <h2 class="page-title">Add New Job Application</h2>
 
-    <label for="company">Company:</label>
-    <input type="text" id="company" [(ngModel)]="company" name="company" required />
+  <form (ngSubmit)="onSubmit()" class="form-container">
 
-    <label for="applicationDate">Application Date:</label>
-    <input type="date" id="applicationDate" [(ngModel)]="applicationDate" name="applicationDate" required />
+    <!-- Job Title Field -->
+    <div class="form-group">
+      <label for="jobTitle">Job Title</label>
+      <input type="text"
+             id="jobTitle"
+             class="form-control"
+             [(ngModel)]="jobTitle"
+             name="jobTitle"
+             required
+             placeholder="Enter job title" />
+    </div>
 
-    <label for="status">Status:</label>
-    <select id="status" [(ngModel)]="status" name="status" required>
-      <option value="Applied">Applied</option>
-      <option value="Interviewing">Interviewing</option>
-      <option value="Offer">Offer</option>
-      <option value="Rejected">Rejected</option>
-    </select>
+    <!-- Company Field -->
+    <div class="form-group">
+      <label for="company">Company</label>
+      <input type="text"
+             id="company"
+             class="form-control"
+             [(ngModel)]="company"
+             name="company"
+             required
+             placeholder="Enter company name" />
+    </div>
 
-    <label for="notes">Notes:</label>
-    <textarea id="notes" [(ngModel)]="notes" name="notes"></textarea>
+    <!-- Application Date Field -->
+    <div class="form-group">
+      <label for="applicationDate">Application Date</label>
+      <input type="date"
+             id="applicationDate"
+             class="form-control"
+             [(ngModel)]="applicationDate"
+             name="applicationDate"
+             required />
+    </div>
 
-    <button type="submit">Add Job Application</button>
+    <!-- Status Dropdown -->
+    <div class="form-group">
+      <label for="status">Status</label>
+      <select id="status"
+              class="form-control"
+              [(ngModel)]="status"
+              name="status"
+              required>
+        <option value="Applied">Applied</option>
+        <option value="Interviewing">Interviewing</option>
+        <option value="Offer">Offer</option>
+        <option value="Rejected">Rejected</option>
+      </select>
+    </div>
+
+    <!-- Notes Field -->
+    <div class="form-group">
+      <label for="notes">Notes</label>
+      <textarea id="notes"
+                class="form-control"
+                [(ngModel)]="notes"
+                name="notes"
+                placeholder="Any additional notes (optional)"></textarea>
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit" class="btn btn-primary" [disabled]="!jobTitle || !company || !applicationDate || !status">
+      Add Job Application
+    </button>
   </form>
 </div>

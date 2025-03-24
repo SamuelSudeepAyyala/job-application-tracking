@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using job_application_tracking.Server.Models;
 using JobApplicationTracking.Server.Models;
+using job_application_tracking.Server.services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace job_application_tracking.Server.Controllers
 {
@@ -14,11 +16,13 @@ namespace job_application_tracking.Server.Controllers
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
+        private readonly TokenService _tokenService;
 
-        public AuthController(UserManager<User> userManager, SignInManager<User> signInManager)
+        public AuthController(UserManager<User> userManager, SignInManager<User> signInManager, TokenService tokenService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _tokenService = tokenService;
         }
 
         // POST api/auth/register
@@ -71,12 +75,15 @@ namespace job_application_tracking.Server.Controllers
             }
 
             var result = await _signInManager.PasswordSignInAsync(user, loginRequest.Password, false, false);
+            
             if (!result.Succeeded)
             {
                 return Unauthorized("Invalid username or password.");
             }
 
-            return Ok(user);
+            var token = _tokenService.GenerateToken(user.Id);
+
+            return Ok(new { userId = user.Id, username = user.UserName, token = token } );
         }
     }
 }
